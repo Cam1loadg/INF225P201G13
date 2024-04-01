@@ -15,8 +15,9 @@ Este es el repositorio del *Grupo 13*, cuyos integrantes son:
 
 ## Identificicación del proyecto base del semestre 2023-2
 
-- Nuestro proyecto base fue realizado por integrantes del Grupo 11 del paralelo 201 del año 2023-2 y empleando diversas tecnologías le entrega al cliente una página en la cual
-puede agendar hora con los distintos éxamenes y máquinas presentes en el recinto de salud además de comprobar el correcto agendamiento de la misma.
+- Nuestro proyecto base fue realizado por integrantes del Grupo 11 del paralelo 201 del año 2023-2 con el fin de brindar un sistema el cual permita llevar un registro de las horas agendadas en el área de imagen,
+modernizando y mejorando así la manera de registrar existente, además de evitar las modificaciones arbitrarias, los errores al momento de ingresar datos y los problemas de legibilidad existentes.
+
 
 ## Lineamientos Entregas
 
