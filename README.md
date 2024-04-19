@@ -12,6 +12,9 @@ Este es el repositorio del *Grupo 13*, cuyos integrantes son:
 
 - [Puede acceder a la wiki de nuestro proyecto actual mediante el siguiente enlace](https://github.com/Cam1loadg/INF225P201G13/wiki)
 
+## Historiad de usuario
+
+- [Puede acceder a las historias de usuario de nuestro proyecto actual mediante el siguiente enlace](https://github.com/Cam1loadg/INF225P201G13/issues)
 
 ## Identificicación del proyecto base del semestre 2023-2
 
