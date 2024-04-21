@@ -31,3 +31,35 @@ modernizando y mejorando así la manera de registrar existente, además de evita
 ## Aspectos técnicos relevantes
 
 _Todo aspecto relevante cuando para poder usar el proyecto o consideraciones del proyecto base a ser entregado_
+
+## Instrucciones compilación
+
+_Prerrequisitos:_ 
+* Instalar NodeJS (Versión LTS).
+* Configurar una Base de Datos en MongoDB.
+
+### Cliente
+
+Desde la carpeta `client`, abrir una terminal y ejecutar el siguiente comando:
+
+```
+npm start
+```
+
+Esto inicia la app (frontend) en modo desarrollador, alojado en [http://localhost:3000](http://localhost:3000), lo cual se accede por el navegador web de prefencia.
+
+Para detener el cliente, en la terminal realizar `CTRL+C`, luego `Y` y `Enter`.
+
+### Servidor
+
+**Importante:** El servidor utiliza MongoDB, entonces para conectar a una Base de Datos en MongoDB, se debe modificar el archivo `Database/index.js` y cambiar la URL `const MONGO_URL` de ser necesario.
+
+Desde la carpeta `server`, abrir una terminal y ejecutar el siguiente comando:
+
+```
+npm run dev
+```
+
+Esto inicia el servidor (backend), alojado en [http://localhost:5000](http://localhost:5000).
+
+Para detener el servidor, en la terminal realizar `CTRL+C`, luego `Y` y `Enter`.
