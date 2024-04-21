@@ -90,7 +90,7 @@ function IngresoHora() {
                         <option value="Dr. Pedro">Dr. Pedro</option>
                         <option value="Dr. Juan">Dr. Juan</option>
                         <option value="Dra. Ignacia">Dra. Ignacia</option>
-                        <option value="Dra. Dian">Dra. Diana</option>
+                        <option value="Dra. Diana">Dra. Diana</option>
                     </select>
                 </div>
                 <br />

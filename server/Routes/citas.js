@@ -43,10 +43,8 @@ router.route('/:id').delete((req, res) => {
 router.route('/modify/:id').put((req, res) => {
     Cita.findById(req.params.id)
     .then(cita => {
-        // Update the cita object with the new data
-        cita.fecha = req.body.fecha; // Update fecha with the new value
+        cita.fecha = req.body.fecha;
 
-        // Save the updated cita object
         cita.save()
         .then(() => res.json('Cita updated successfully'))
         .catch(err => res.status(400).json('Error updating cita: ' + err));
