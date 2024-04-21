@@ -45,6 +45,7 @@ class VerCitas extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.handleModify = this.handleModify.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleClose = this.handleClose.bind(this);
 
     this.state = {
       rut: '',
@@ -88,6 +89,18 @@ class VerCitas extends Component {
     }
   }
 
+  handleClose = () => {
+    this.setState({ isModifyFormOpen: false, appointmentToModify: null });
+  
+    axios.get(`http://localhost:5000/citas/rut/${this.state.rut}`)
+      .then(response => {
+        this.setState({ horas: response.data })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   onChangeRut(e) {
     let inputValue = e.target.value;
     inputValue = inputValue.replace(/[^\d]/g, '');
@@ -109,7 +122,6 @@ class VerCitas extends Component {
       .catch((error) => {
         console.log(error);
       });
-    console.log(this.state.fecha)
   }
 
   listaCitas() {
@@ -129,7 +141,7 @@ class VerCitas extends Component {
         <ModificarCitaForm 
           id={this.state.appointmentToModify} 
           dataDate={this.state.fecha}
-          onClose={() => this.setState({ isModifyFormOpen: false, appointmentToModify: null })} 
+          onClose={this.handleClose} 
         />
       );
     }
