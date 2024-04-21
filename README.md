@@ -40,26 +40,38 @@ _Prerrequisitos:_
 
 ### Cliente
 
-Desde la carpeta `client`, abrir una terminal y ejecutar el siguiente comando:
+Desde la carpeta `client`, abrir una terminal y seguir los siguientes pasos:
+
+1. Para instalar los módulos necesarios para iniciar el cliente (frontend) utilizar el comando:
+
+```
+npm install
+```
+
+2. Para iniciar el cliente en modo desarrollador, alojado en [http://localhost:3000](http://localhost:3000), se utiliza el siguiente comando:
 
 ```
 npm start
 ```
 
-Esto inicia la app (frontend) en modo desarrollador, alojado en [http://localhost:3000](http://localhost:3000), lo cual se accede por el navegador web de prefencia.
-
-Para detener el cliente, en la terminal realizar `CTRL+C`, luego `Y` y `Enter`.
+3. Para detener el cliente, en la terminal realizar `CTRL+C`, luego `Y` y `Enter`.
 
 ### Servidor
 
 **Importante:** El servidor utiliza MongoDB, entonces para conectar a una Base de Datos en MongoDB, se debe modificar el archivo `Database/index.js` y cambiar la URL `const MONGO_URL` de ser necesario.
 
-Desde la carpeta `server`, abrir una terminal y ejecutar el siguiente comando:
+Desde la carpeta `server`, abrir una terminal y seguir los siguientes pasos:
+
+1. Para instalar los módulos necesarios para iniciar el servidor (backend) utilizar el comando:
+
+```
+npm install
+```
+
+2. Para iniciar el servidor, alojado en [http://localhost:5000](http://localhost:5000), se utiliza el siguiente comando:
 
 ```
 npm run dev
 ```
 
-Esto inicia el servidor (backend), alojado en [http://localhost:5000](http://localhost:5000).
-
-Para detener el servidor, en la terminal realizar `CTRL+C`, luego `Y` y `Enter`.
+3. Para detener el servidor, en la terminal realizar `CTRL+C`, luego `Y` y `Enter`.
