@@ -95,9 +95,9 @@ function IngresoHora() {
                 </div>
                 <br />
                 <div>
-                    <label htmlFor="fecha">Fecha:</label>
+                    <label htmlFor="fecha">Fecha y hora:</label>
                     <input
-                        type="date"
+                        type="datetime-local"
                         id="fecha"
                         value={fecha}
                         onChange={(e) => setDate(e.target.value)}

@@ -7,12 +7,14 @@ import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import moment from 'moment';
+import ModificarCitaForm from "./modificar_cita";
 
 const Horas = props => (
   <Table striped bordered hover>
     <thead>
       <tr>
         <th>Rut</th>
+        <th>Correo</th>
         <th>Nombre Doctor</th>
         <th>Fecha</th>
         <th>Máquina</th>
@@ -22,6 +24,7 @@ const Horas = props => (
     <tbody>
       <tr>
         <th>{props.cita.rut}</th>
+        <th>{props.cita.correo_paciente}</th>
         <th>{props.cita.nombre_doctor}</th>
         <th>{props.cita.fecha ? moment(props.cita.fecha).format('DD/MM/YYYY HH:mm') : "N/A"}</th>
         <th>{props.cita.maquina}</th>
@@ -40,6 +43,7 @@ class VerCitas extends Component {
 
     this.onChangeRut = this.onChangeRut.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleModify = this.handleModify.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
 
     this.state = {
@@ -47,13 +51,21 @@ class VerCitas extends Component {
       nombre_doctor: '',
       fecha: new Date(),
       maquina: '',
-      horas: []
+      horas: [],
+      isModifyFormOpen: false,
+      appointmentToModify: null
     }
   }
 
   handleModify(id) {
-    // Implement the modify logic here
-    console.log("Modify entry with ID:", id);
+    axios.get(`http://localhost:5000/citas/${id}`)
+      .then(response => {
+        this.setState({ fecha: response.data.fecha });
+        this.setState({ isModifyFormOpen: true, appointmentToModify: id });
+      })
+      .catch(error => {
+        console.error("Error fetching cita data: ", error);
+      });
   }
 
   handleDelete(id) {
@@ -97,6 +109,7 @@ class VerCitas extends Component {
       .catch((error) => {
         console.log(error);
       });
+    console.log(this.state.fecha)
   }
 
   listaCitas() {
@@ -111,6 +124,15 @@ class VerCitas extends Component {
   }
 
   render() {
+    if (this.state.isModifyFormOpen) {
+      return (
+        <ModificarCitaForm 
+          id={this.state.appointmentToModify} 
+          dataDate={this.state.fecha}
+          onClose={() => this.setState({ isModifyFormOpen: false, appointmentToModify: null })} 
+        />
+      );
+    }
     return (
       <div className="App">
         <div className="col-md-12">

@@ -40,4 +40,18 @@ router.route('/:id').delete((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/modify/:id').put((req, res) => {
+    Cita.findById(req.params.id)
+    .then(cita => {
+        // Update the cita object with the new data
+        cita.fecha = req.body.fecha; // Update fecha with the new value
+
+        // Save the updated cita object
+        cita.save()
+        .then(() => res.json('Cita updated successfully'))
+        .catch(err => res.status(400).json('Error updating cita: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 module.exports = router;
