@@ -26,6 +26,7 @@ modernizando y mejorando así la manera de registrar existente, además de evita
 
 - [Lineamiento Entrega 1 (PDF)](https://aula.usm.cl/pluginfile.php/5819266/mod_resource/content/1/Hito%201%20vf.pdf)
 - [Lineamiento Entrega 2 (PDF)](https://aula.usm.cl/pluginfile.php/5834724/mod_resource/content/1/Hito%202%20vf.pdf)
+- [Lineamiento Entrega 2 (PDF)](https://aula.usm.cl/pluginfile.php/5859038/mod_resource/content/1/Hito%203%20vf.pdf)
 
 
 ## Aspectos técnicos relevantes
