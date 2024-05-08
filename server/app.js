@@ -10,6 +10,7 @@ app.set("port", process.env.PORT || 5000);
 
 // routes
 const citasRouter = require('./Routes/citas');
+const userRouter = require('./Routes/user')
 
 // middlewares
 app.use(morgan("dev"));
@@ -24,5 +25,6 @@ app.listen(app.get("port"), () => {
 
 
 app.use('/citas', citasRouter);
+app.use('/user', userRouter)
 
 module.exports = app;
