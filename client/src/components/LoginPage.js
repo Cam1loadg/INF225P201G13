@@ -2,15 +2,26 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
-
+import axios from 'axios';
 
 const LoginPage = () => {
   const [rut, setRut] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Logging in with RUT:', rut, 'and password:', password);
+    try{
+      const response = await axios.post('http://localhost:5000/user/login', { rut, password })
+      if (response.data.message === 'Login successful'){
+        localStorage.setItem('token', response.data.token);
+        window.alert('Ingreso exitoso');
+        window.location.href = '/';
+      }
+    }
+    catch(error){
+      console.log(error);
+      window.alert('Error al ingresar. Intenta nuevamente.');
+    }
   };
 
   const handleChangeRut = (e) => {

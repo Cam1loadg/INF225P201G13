@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+import { faIdBadge } from '@fortawesome/free-solid-svg-icons';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -22,20 +25,24 @@ const RegisterPage = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     if (name === '' || rut === '' || password === '' || confirmPassword === '' || cargo === ''){
-        window.alert('Please fill in all fields');
+        window.alert('Por favor rellena todos los campos');
     }
     else{
         if (password === confirmPassword){
             try {
                 const response = await registerUser({ name, rut, password, cargo });
                 if (response.message === 'User already exists') {
-                    window.alert('User with this RUT already exists');
+                    window.alert('Ya existe un usuario con este RUT');
                     return;
+                }
+                if (response.message === 'User registered successfully'){
+                  window.alert('Registro exitoso');
+                  window.location.href = '/login';
                 }
             } 
             catch (error) {
                 console.log(error);
-                window.alert('Registration failed. Please try again later.');
+                window.alert('Error en registro. Intenta nuevamente.');
             }
         }
         else{
@@ -56,23 +63,33 @@ const RegisterPage = () => {
       <h2>Register</h2>
       <form onSubmit={handleRegister}>
         <div className="mb-3">
-          <label htmlFor="name" className="form-label">Name</label>
+          <label htmlFor="name" className="form-label">
+            <FontAwesomeIcon icon={faUser} /> Nombre
+          </label>
           <input type="text" className="form-control" id="name" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="mb-3">
-          <label htmlFor="rut" className="form-label">RUT</label>
+          <label htmlFor="rut" className="form-label">
+            <FontAwesomeIcon icon={faUser} /> RUT
+          </label>
           <input type="text" className="form-control" id="rut" value={rut} onChange={handleChangeRut} maxLength={12} />
         </div>
         <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
+          <label htmlFor="password" className="form-label">
+            <FontAwesomeIcon icon={faKey} /> Contraseña
+          </label>
           <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className="mb-3">
-          <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+          <label htmlFor="confirmPassword" className="form-label">
+            <FontAwesomeIcon icon={faKey} /> Confirmar Contraseña
+          </label>
           <input type="password" className="form-control" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
         </div>
         <div className="mb-3">
-          <label htmlFor="cargo" className="form-label">Cargo</label>
+          <label htmlFor="cargo" className="form-label">
+            <FontAwesomeIcon icon={faIdBadge} /> Cargo
+          </label>
           <select className="form-select" id="cargo" value={cargo} onChange={(e) => setCargo(e.target.value)}>
             <option value="">Select Cargo</option>
             <option value="TENS">TENS</option>

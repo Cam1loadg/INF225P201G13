@@ -3,9 +3,7 @@ import Container from "react-bootstrap/esm/Container";
 import Card from 'react-bootstrap/Card';
 import Placeholder from 'react-bootstrap/Placeholder';
 
-
 function PaginaInicio() {
-
   return (
     <div className="App">
         <Container className="col-md-12 text-center">

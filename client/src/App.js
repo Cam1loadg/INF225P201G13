@@ -9,7 +9,30 @@ import IngresoHora from "./components/ingreso_hora";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 
+import { jwtDecode } from "jwt-decode";
+
+const isLoggedIn = () => {
+  const token = localStorage.getItem('token');
+  return token !== null;
+};
+
+const handleLogout = () => {
+  localStorage.removeItem('token');
+  window.alert('Sesión terminada')
+  window.location.href = '/';
+};
+
+const getUserNameFromToken = () => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    const decoded = jwtDecode(token);
+    return decoded.name;
+  }
+  return null;
+};
+
 function App() {
+  const userName = getUserNameFromToken();
   return (
     <div className="App">
       <Navbar bg="primary" variant="dark" expand="lg">
@@ -23,7 +46,14 @@ function App() {
               <Link to={"/ver-citas"} className="nav-link">Mis Horas</Link>
             </Nav>
             <Nav>
-              <Link to={"/login"} className="nav-link">Ingreso</Link>
+              {isLoggedIn() ? (
+                  <>
+                    <div className="nav-link">Sesión: <span style={{ color: 'lime' }}>{userName}</span></div>
+                    <Link to="/" className="nav-link" onClick={handleLogout} style={{ color: 'red' }}>Cerrar Sesión</Link>
+                  </>
+                ) : (
+                  <Link to="/login" className="nav-link">Ingreso</Link>
+                )}
             </Nav>
           </Navbar.Collapse>
         </Container>
