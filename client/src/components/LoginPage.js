@@ -33,7 +33,7 @@ const LoginPage = () => {
 
   return (
     <div className="container mt-5">
-      <h2>Login</h2>
+      <h2>Ingreso</h2>
       <form onSubmit={handleLogin}>
         <div className="mb-3">
           <label htmlFor="rut" className="form-label">
@@ -47,10 +47,10 @@ const LoginPage = () => {
           </label>
           <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <button type="submit" className="btn btn-primary">Login</button>
+        <button type="submit" className="btn btn-primary">Ingresar</button>
       </form>
       <div className="mt-3">
-        <p>Don't have an account? <Link to="/register">Register here</Link></p>
+        <p>¿No tienes cuenta? <Link to="/register">Registrar aquí</Link></p>
       </div>
     </div>
   );

@@ -60,7 +60,7 @@ const RegisterPage = () => {
 
   return (
     <div className="container mt-5">
-      <h2>Register</h2>
+      <h2>Registrar</h2>
       <form onSubmit={handleRegister}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
@@ -96,10 +96,10 @@ const RegisterPage = () => {
             <option value="Secretaría">Secretaría</option>
           </select>
         </div>
-        <button type="submit" className="btn btn-primary">Register</button>
+        <button type="submit" className="btn btn-primary">Registrar</button>
       </form>
       <div className="mt-3">
-        <p>Already have an account? <Link to="/login">Login here</Link></p>
+        <p>¿Ya tienes cuenta? <Link to="/login">Ingresar</Link></p>
       </div>
     </div>
   );
