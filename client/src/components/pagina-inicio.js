@@ -1,12 +1,9 @@
 import React from "react";
 import Container from "react-bootstrap/esm/Container";
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Placeholder from 'react-bootstrap/Placeholder';
 
-
 function PaginaInicio() {
-
   return (
     <div className="App">
         <Container className="col-md-12 text-center">
