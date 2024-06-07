@@ -31,7 +31,7 @@ modernizando y mejorando así la manera de registrar existente, además de evita
 
   ## Vídeos
   
-[![Vídeo Explicativo Hito 4](https://img.youtube.com/vi/configuroweb/0.jpg)](https://www.youtube.com/watch?v=WInZvphc8ZQ)
+[Vídeo Explicativo Hito 4](https://www.youtube.com/watch?v=WInZvphc8ZQ)
 
 
 ## Aspectos técnicos relevantes
