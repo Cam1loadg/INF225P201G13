@@ -192,6 +192,7 @@ class VerCitas extends Component {
                     aria-label="DV"
                     aria-describedby="dvHelp"
                     value={this.state.dv}
+                    disabled
                     readOnly
                     style={{ width: '50px' }}
                   />

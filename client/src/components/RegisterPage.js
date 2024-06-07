@@ -32,6 +32,10 @@ const RegisterPage = () => {
         if (password === confirmPassword){
             try {
                 const response = await registerUser({ name, rut: `${rut}-${dv}`, password, cargo });
+                if (response.message === 'Invalid RUT format') {
+                  window.alert('El RUT ingresado no es válido, verifica e intenta nuevamente');
+                  return;
+              }
                 if (response.message === 'User already exists') {
                     window.alert('Ya existe un usuario con este RUT');
                     return;
