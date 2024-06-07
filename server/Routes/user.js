@@ -79,10 +79,4 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.route('/:id').delete(async (req, res) => {
-  await User.findByIdAndRemove(req.params.id)
-  .then(() => res.json({message: 'Usuario eliminado correctamente.'}))
-  .catch(err => res.status(400).json('Error: ' + err));
-});
-
 module.exports = router;
