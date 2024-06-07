@@ -73,7 +73,7 @@ npm install
 2. Para iniciar el servidor, alojado en [http://localhost:5000](http://localhost:5000), se utiliza el siguiente comando:
 
 ```
-npm run dev
+npm start
 ```
 
 3. Para detener el servidor, en la terminal realizar `CTRL+C`, luego `Y` y `Enter`.

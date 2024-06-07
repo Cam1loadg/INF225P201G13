@@ -49,6 +49,7 @@ class VerCitas extends Component {
 
     this.state = {
       rut: '',
+      dv: '',
       nombre_doctor: '',
       fecha: new Date(),
       maquina: '',
@@ -92,7 +93,7 @@ class VerCitas extends Component {
   handleClose = () => {
     this.setState({ isModifyFormOpen: false, appointmentToModify: null });
   
-    axios.get(`http://localhost:5000/citas/rut/${this.state.rut}`)
+    axios.get(`http://localhost:5000/citas/rut/${this.state.rut}-${this.state.dv}`)
       .then(response => {
         this.setState({ horas: response.data })
       })
@@ -105,17 +106,38 @@ class VerCitas extends Component {
     let inputValue = e.target.value;
     inputValue = inputValue.replace(/[^\d]/g, '');
     
-    let formattedRut = inputValue.replace(/^(\d{1,2})(\d{3})(\d{3})(\w{1})$/, '$1.$2.$3-$4');
+    let formattedRut = inputValue.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
 
     this.setState({
       rut: formattedRut
     });
+
+    if (formattedRut.length >= 9) {
+      this.setState({ dv: this.calculateDv(inputValue) });
+    } else {
+      this.setState({ dv: '' });
+    }
+  }
+
+  calculateDv(rut) {
+    let cleanRut = rut.replace(/\./g, '');
+    let total = 0;
+    let factor = 2;
+    for (let i = cleanRut.length - 1; i >= 0; i--) {
+      total += cleanRut.charAt(i) * factor;
+      factor = factor === 7 ? 2 : factor + 1;
+    }
+    const remainder = total % 11;
+    const dv = 11 - remainder;
+    if (dv === 11) return '0';
+    if (dv === 10) return 'K';
+    return dv.toString();
   }
 
   onSubmit(e) {
     e.preventDefault();
   
-    axios.get(`http://localhost:5000/citas/rut/${this.state.rut}`)
+    axios.get(`http://localhost:5000/citas/rut/${this.state.rut}-${this.state.dv}`)
       .then(response => {
         this.setState({ horas: response.data })
       })
@@ -157,12 +179,22 @@ class VerCitas extends Component {
               <Form onSubmit={this.onSubmit}>
                 <InputGroup className="md-12">
                   <Form.Control 
-                    placeholder="12.345.678-9"
+                    placeholder="12.345.678"
                     aria-label="Rut"
                     aria-describedby="rutHelp"
                     value={this.state.rut}
                     onChange={this.onChangeRut}
-                    maxLength={12}
+                    minLength={9}
+                    maxLength={10}
+                  />
+                  <span className="mx-2">-</span>
+                  <Form.Control 
+                    aria-label="DV"
+                    aria-describedby="dvHelp"
+                    value={this.state.dv}
+                    disabled
+                    readOnly
+                    style={{ width: '50px' }}
                   />
                   <Button variant="outline-secondary" type="submit"> Enviar </Button>
                 </InputGroup>
