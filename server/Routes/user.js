@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const validateRut = (rut) => {
-  const regex = /^\d{1,2}\.\d{3}\.\d{3}-[\dKk]$/;
+  const regex = /^\d{1,2}\.\d{3}\.\d{3}-[\dK]$/;
   if (!regex.test(rut)) return false;
 
   const [rutBody, dv] = rut.split('-');
@@ -33,7 +33,7 @@ router.post('/register', async (req, res) => {
     try {
       const { name, rut, password, cargo } = req.body;
 
-      if (!validateRut(rut)) {
+      if (!validateRut(rut) || rut.length < 11) {
         return res.status(401).json({ message: 'Invalid RUT format' });
       }
   

@@ -2,7 +2,7 @@ const router = require('express').Router();
 let Cita = require('../Models/cita.model');
 
 const validateRut = (rut) => {
-    const regex = /^\d{1,2}\.\d{3}\.\d{3}-[\dKk]$/;
+    const regex = /^\d{1,2}\.\d{3}\.\d{3}-[\dK]$/;
     if (!regex.test(rut)) return false;
   
     const [rutBody, dv] = rut.split('-');
@@ -42,7 +42,7 @@ router.route('/add').post((req, res) => {
     const now = new Date();
     now.setHours(now.getHours() + 1);
 
-    if (!validateRut(rut)) {
+    if (!validateRut(rut) || rut.length < 11) {
         return res.status(401).json({ message: 'Invalid RUT format' });
     }
 
