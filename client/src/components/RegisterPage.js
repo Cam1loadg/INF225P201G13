@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +8,7 @@ import { faIdBadge } from '@fortawesome/free-solid-svg-icons';
 const RegisterPage = () => {
   const [name, setName] = useState('');
   const [rut, setRut] = useState('');
+  const [dv, setDv] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [cargo, setCargo] = useState('');
@@ -24,13 +25,13 @@ const RegisterPage = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (name === '' || rut === '' || password === '' || confirmPassword === '' || cargo === ''){
+    if (name === '' || rut === '' || dv === '' || password === '' || confirmPassword === '' || cargo === ''){
         window.alert('Por favor rellena todos los campos');
     }
     else{
         if (password === confirmPassword){
             try {
-                const response = await registerUser({ name, rut, password, cargo });
+                const response = await registerUser({ name, rut: `${rut}-${dv}`, password, cargo });
                 if (response.message === 'User already exists') {
                     window.alert('Ya existe un usuario con este RUT');
                     return;
@@ -54,9 +55,32 @@ const RegisterPage = () => {
   const handleChangeRut = (e) => {
     let inputValue = e.target.value;
     inputValue = inputValue.replace(/[^\d]/g, '');
-    let formattedRut = inputValue.replace(/^(\d{1,2})(\d{3})(\d{3})(\w{1})$/, '$1.$2.$3-$4');
+    let formattedRut = inputValue.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
     setRut(formattedRut);
   } 
+
+  const calculateDv = (rut) => {
+    let cleanRut = rut.replace(/\./g, '');
+    let total = 0;
+    let factor = 2;
+    for (let i = cleanRut.length - 1; i >= 0; i--) {
+      total += cleanRut.charAt(i) * factor;
+      factor = factor === 7 ? 2 : factor + 1;
+    }
+    const remainder = total % 11;
+    const dv = 11 - remainder;
+    if (dv === 11) return '0';
+    if (dv === 10) return 'K';
+    return dv.toString();
+  };
+
+  useEffect(() => {
+    if (rut.length >= 9) {
+      setDv(calculateDv(rut));
+    } else {
+      setDv('');
+    }
+  }, [rut]);
 
   return (
     <div className="container mt-5">
@@ -72,7 +96,11 @@ const RegisterPage = () => {
           <label htmlFor="rut" className="form-label">
             <FontAwesomeIcon icon={faUser} /> RUT
           </label>
-          <input type="text" className="form-control" id="rut" value={rut} onChange={handleChangeRut} minLength={11} maxLength={12} />
+          <div className="d-flex">
+            <input type="text" className="form-control" id="rut" value={rut} onChange={handleChangeRut} minLength={9} maxLength={10} />
+            <span className="mx-2">_</span>
+            <input type="text" className="form-control" id="dv" value={dv} readOnly disabled />
+          </div>
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">
