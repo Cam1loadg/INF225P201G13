@@ -9,15 +9,17 @@ router.post('/register', async (req, res) => {
   
       const existingUser = await User.findOne({ rut });
       if (existingUser) {
-        return res.status(201).json({ message: 'User already exists' });
+        return res.status(401).json({ message: 'User already exists' });
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
   
       const newUser = new User({ name, rut, password: hashedPassword, cargo });
       await newUser.save();
+
+      const savedUser = await User.findOne({ rut });
   
-      res.status(201).json({ message: 'User registered successfully' });
+      res.status(201).json({ message: 'User registered successfully', userId: savedUser._id });
     } 
     catch (error) {
       console.error(error);
@@ -45,6 +47,12 @@ router.post('/register', async (req, res) => {
       console.error(error);
       res.status(500).json({ error: 'Internal server error' });
     }
+  });
+
+  router.route('/:id').delete(async (req, res) => {
+    await User.findByIdAndRemove(req.params.id)
+    .then(() => res.json({message: 'Usuario eliminado correctamente.'}))
+    .catch(err => res.status(400).json('Error: ' + err));
   });
 
   module.exports = router;

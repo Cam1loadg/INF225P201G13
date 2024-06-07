@@ -72,7 +72,7 @@ const RegisterPage = () => {
           <label htmlFor="rut" className="form-label">
             <FontAwesomeIcon icon={faUser} /> RUT
           </label>
-          <input type="text" className="form-control" id="rut" value={rut} onChange={handleChangeRut} maxLength={12} />
+          <input type="text" className="form-control" id="rut" value={rut} onChange={handleChangeRut} minLength={11} maxLength={12} />
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">

@@ -84,6 +84,7 @@ function IngresoHora() {
                         value={rut}
                         onChange={handleChangeRut}
                         placeholder="12.345.678-9"
+                        minLength={11}
                         maxLength={12}
                         required
                     />
