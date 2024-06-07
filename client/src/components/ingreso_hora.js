@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Styles/ingreso_hora.css';
 
@@ -9,6 +9,17 @@ function IngresoHora() {
     const [nombre_doctor, setDoctorName] = useState('');
     const [fecha, setDate] = useState('');
     const [maquina, setMachine] = useState('');
+    const [minFecha, setMinFecha] = useState('');
+
+    useEffect(() => {
+        const now = new Date();
+        now.setHours(now.getHours() + 1);
+        const offset = now.getTimezoneOffset();
+        now.setMinutes(now.getMinutes() - offset);
+
+        const isoString = now.toISOString().slice(0, 16);
+        setMinFecha(isoString);
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -101,6 +112,7 @@ function IngresoHora() {
                         id="fecha"
                         value={fecha}
                         onChange={(e) => setDate(e.target.value)}
+                        min={minFecha}
                         required
                     />
                 </div>

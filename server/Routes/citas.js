@@ -14,6 +14,13 @@ router.route('/add').post((req, res) => {
     const fecha = Date.parse(req.body.fecha);
     const maquina = req.body.maquina;
 
+    const now = new Date();
+    now.setHours(now.getHours() + 1);
+
+    if (fecha < now.getTime()) {
+        return res.status(400).json('Error: La fecha y hora de la cita deben ser al menos una hora del tiempo actual.');
+    }
+
     const nuevaCita = new Cita({nombre_paciente,correo_paciente,rut,nombre_doctor,fecha,maquina});
 
     nuevaCita.save()
@@ -43,7 +50,16 @@ router.route('/:id').delete((req, res) => {
 router.route('/modify/:id').put((req, res) => {
     Cita.findById(req.params.id)
     .then(cita => {
-        cita.fecha = req.body.fecha;
+        const nuevaFecha = Date.parse(req.body.fecha);
+
+        const now = new Date();
+        now.setHours(now.getHours() + 1);
+
+        if (nuevaFecha < now.getTime()) {
+            return res.status(400).json('Error: La fecha y hora de la cita deben ser al menos una hora del tiempo actual.');
+        }
+
+        cita.fecha = nuevaFecha;
 
         cita.save()
         .then(() => res.json('Cita updated successfully'))
