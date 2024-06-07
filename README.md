@@ -30,7 +30,7 @@ modernizando y mejorando así la manera de registrar existente, además de evita
 - [Lineamiento Entrega 4 (PDF)](https://aula.usm.cl/pluginfile.php/5880739/mod_resource/content/1/Hito%204%20vf.pdf)
 
   ## Vídeos
--[![Vídeo Explicativo Hito 4](https://markdown-videos.deta.dev/youtube/WInZvphc8ZQ)](https://youtu.be/WInZvphc8ZQ)
+[![](https://markdown-videos.deta.dev/youtube/WInZvphc8ZQ)](https://youtu.be/WInZvphc8ZQ)
 
 
 ## Aspectos técnicos relevantes
