@@ -36,7 +36,7 @@ modernizando y mejorando así la manera de registrar existente, además de evita
 
 ## Aspectos técnicos relevantes
 
-_Todo aspecto relevante cuando para poder usar el proyecto o consideraciones del proyecto base a ser entregado_
+Hito 4: Para volver a ejecutar tests.py hay que borrar manualmente en la base de datos el/los nuevo(s) usuario(s) creado(s) durante la ejecución anterior (funcionando correctamente solo debería ser el de los datos válidos, puesto que los inválidos no deberían crearse) o la otra opción es modificar el rut de prueba por otro que no exista en la base de datos, sin embargo, en dicho caso hay que tener cuidado de que sea un rut real dado que el digito verificador se calcula a partir del resto del rut.
 
 ## Instrucciones compilación
 
