@@ -37,6 +37,7 @@ modernizando y mejorando así la manera de registrar existente, además de evita
 ## Aspectos técnicos relevantes
 
 Hito 4: Para volver a ejecutar tests.py hay que borrar manualmente en la base de datos el/los nuevo(s) usuario(s) creado(s) durante la ejecución anterior (funcionando correctamente solo debería ser el de los datos válidos, puesto que los inválidos no deberían crearse) o la otra opción es modificar el rut de prueba por otro que no exista en la base de datos, sin embargo, en dicho caso hay que tener cuidado de que sea un rut real dado que el digito verificador se calcula a partir del resto del rut.
+
 Hito 5: Para ejecutar el plan de pruebas, debe cambiar el destino al archivo CSV correspondiente en cada prueba, siendo así prueba_2 usado para Registrar citas y rut_consulta para Consultar Citas.
 
 ## Instrucciones compilación
