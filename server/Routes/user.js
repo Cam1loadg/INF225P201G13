@@ -33,7 +33,7 @@ router.post('/register', async (req, res) => {
     try {
       const { name, rut, password, cargo } = req.body;
 
-      if (!validateRut(rut) || rut.length < 11) {
+      if (!validateRut(rut)) {
         return res.status(401).json({ message: 'Invalid RUT format' });
       }
       let query = {rut: rut.toString()};
