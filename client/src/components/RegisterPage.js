@@ -25,36 +25,33 @@ const RegisterPage = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    if (name === '' || rut === '' || dv === '' || password === '' || confirmPassword === '' || cargo === ''){
+    if (name === '' || rut === '' || dv === '' || password === '' || confirmPassword === '' || cargo === '') {
         window.alert('Por favor rellena todos los campos');
-    }
-    else{
-        if (password === confirmPassword){
-            try {
-                const response = await registerUser({ name, rut: `${rut}-${dv}`, password, cargo });
-                if (response.message === 'Invalid RUT format') {
-                  window.alert('El RUT ingresado no es válido, verifica e intenta nuevamente');
-                  return;
-              }
-                if (response.message === 'User already exists') {
-                    window.alert('Ya existe un usuario con este RUT');
-                    return;
-                }
-                if (response.message === 'User registered successfully'){
-                  window.alert('Registro exitoso');
-                  window.location.href = '/login';
-                }
+    } else if (password !== confirmPassword) {
+        window.alert('Las contraseñas no son iguales');
+    } else {
+        try {
+            const response = await registerUser({ name, rut: `${rut}-${dv}`, password, cargo });
+            if (response.message === 'Invalid RUT format') {
+                window.alert('El RUT ingresado no es válido, verifica e intenta nuevamente');
+                return;
             } 
-            catch (error) {
-                console.log(error);
-                window.alert('Error en registro. Intenta nuevamente.');
+            if (response.message === 'User already exists') {
+                window.alert('Ya existe un usuario con este RUT');
+                return;
+            } 
+            if (response.message === 'User registered successfully') {
+                window.alert('Registro exitoso');
+                window.location.href = '/login';
+                return;
             }
-        }
-        else{
-            window.alert('Las contraseñas no son iguales');
+        } catch (error) {
+            console.log(error);
+            window.alert('Error en registro. Intenta nuevamente.');
         }
     }
-  };
+};
+
 
   const handleChangeRut = (e) => {
     let inputValue = e.target.value;
